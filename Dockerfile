@@ -18,6 +18,6 @@ RUN sed -i "s/bind 127.0.0.1/bind 0.0.0.0/" /redis-${REDIS_VERSION}/redis.conf \
 FROM alpine:latest as release
 ARG REDIS_VERSION
 ENV REDIS_VERSION=${REDIS_VERSION}
-COPY --from=builder /usr/local/bin/redis-server /usr/local/bin/redis-server
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY --from=builder /redis-${REDIS_VERSION}/redis.conf /redis-${REDIS_VERSION}/redis.conf
 CMD [ "sh", "-c", "/usr/local/bin/redis-server /redis-${REDIS_VERSION}/redis.conf" ]
